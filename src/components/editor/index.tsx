@@ -14,7 +14,6 @@ import "prismjs/themes/prism.min.css";
 import "prismjs/components/prism-clike";
 import "prismjs/components/prism-javascript";
 import { Fira_Code } from "@next/font/google";
-import debounce from "lodash/debounce";
 
 const fireCode = Fira_Code({ subsets: ["latin"] });
 
@@ -44,22 +43,14 @@ export function CodeEditor({
   onCodeChange: (e: string) => void;
 }) {
   const [localCode, setLocalCode] = React.useState(``);
-
-  const delayedOnCodeChange = useCallback(
-    (c: string) => {
-      const debounced = debounce((dc: string) => onCodeChange(dc), 333);
-      debounced(c);
-    },
-    [onCodeChange]
-  );
+  const initalized = React.useRef(false);
 
   useEffect(() => {
-    setLocalCode(code);
+    if (!initalized.current){
+      initalized.current = true;
+      setLocalCode(code);
+    }
   }, [code]);
-
-  useEffect(() => {
-    delayedOnCodeChange(localCode);
-  }, [localCode, delayedOnCodeChange]);
 
   return (
     <div className="body-wrapper">
@@ -76,7 +67,7 @@ export function CodeEditor({
       <div className={fireCode.className + " editor-wrapper"}>
         <Editor
           value={localCode}
-          onValueChange={(code) => setLocalCode(code)}
+          onValueChange={(code) => {setLocalCode(code); onCodeChange(code)}}
           //   @ts-ignore
           highlight={(code) => Prism.highlight(code, Prism.languages.js)}
           padding={10}
