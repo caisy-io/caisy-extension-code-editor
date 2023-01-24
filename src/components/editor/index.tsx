@@ -47,7 +47,7 @@ export function CodeEditor({
   const initalized = React.useRef(false);
 
   useEffect(() => {
-    if (!initalized.current){
+    if (code != "" && !initalized.current){
       initalized.current = true;
       setLocalCode(code);
     }
