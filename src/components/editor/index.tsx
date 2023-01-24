@@ -24,6 +24,7 @@ const prismLanguages = [
   "json",
   "tsx",
   "graphql",
+  "html",
   "css",
   "sass",
   "go",
