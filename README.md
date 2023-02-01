@@ -1,3 +1,8 @@
+# About this caisy extension example 
+
+it uses the open source npm package `react-simple-code-editor` to render the code editor - the code (state of the code editor) persistet with in caisy with the help of the libary 
+`@caisy/ui-extension-react` 
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started
